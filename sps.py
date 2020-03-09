@@ -6,7 +6,7 @@ def validate(res):
     else:
         return True
     
-def pll(re,nm='Guest'):
+def pll(re,nm='You'):
     hand=['Stone','Paper','Scissor']
     print(nm+' selected '+hand[re])
 
@@ -22,14 +22,38 @@ def check(player,computer):
         return 'Lose'
     else:
         return 'Win'
-    
-print('|0 : Stone| |1 : Paper| |2 : Scissor|')
-resp = int(input("Enter the response = "))
-name = input("Enter the name = ")
-if validate(resp):
-    computer = random.randint(0,2)
-    pll(resp,name)
-    pll(computer,'Computer')
-    print(check(resp,computer))
+
+
+i=5
+j=0
+z=0
+nam = input("Enter your name: ")
+while(i>0):
+    print('|0 : Stone| |1 : Paper| |2 : Scissor|')
+    resp = int(input("Enter the response = "))
+    if validate(resp):
+        computer = random.randint(0,2)
+        pll(resp,nam)
+        pll(computer,'Computer')
+        if check(resp,computer) == 'Win':
+            j+=1
+            print("You win in this round")
+            print("Your score "+str(j)+" : "+"Computer score "+str(z))    
+        elif check(resp,computer) == 'Lose':
+            z+=1
+            print("Computer win in this round")
+            print("Your score "+str(j)+" : "+"Computer score "+str(z))
+        else:
+            print("Its a Draw in this round")
+            print("Your score "+str(j)+" : "+"Computer score "+str(z))
+        
+    else:
+        print('Please enter a valide number')
+
+    if j == 5 or z == 5:
+        break
+
+if z > j:
+    print("Computer wins : You loses"+" = "+str(z)+" : "+str(j))
 else:
-    print('Please enter a valide number')
+    print("You win : Computer loses"+" = "+str(j)+" : "+str(z))
